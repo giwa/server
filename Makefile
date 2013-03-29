@@ -39,7 +39,7 @@ UDPEchoClient: UDPEchoClient.cpp PracticalSocket.cpp PracticalSocket.h
 UDPEchoServer: UDPEchoServer.cpp PracticalSocket.cpp PracticalSocket.h
 	$(CXX) $(CXXFLAGS) -o UDPEchoServer UDPEchoServer.cpp PracticalSocket.cpp $(LIBS)
 
-Server: sever.cpp PracticalSocket.cpp PracticalSocket.h
+sever: server.cpp PracticalSocket.cpp PracticalSocket.h
 	$(CXX) $(CXXFLAGS) -o server server.cpp PracticalSocket.cpp $(LIBS)
 
 TCPEchoServer-Thread: TCPEchoServer-Thread.cpp PracticalSocket.cpp PracticalSocket.h

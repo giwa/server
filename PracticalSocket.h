@@ -19,21 +19,21 @@
 
 #ifndef __PRACTICALSOCKET_INCLUDED__
 #define __PRACTICALSOCKET_INCLUDED__
-
+#include <pcap.h>
 #include <string>            // For string
 #include <exception>         // For exception class
 #include <stdlib.h>         // For exception class
 #include <stdio.h>         // For exception class
 #include <string.h>         // For exception class
-#include <pcap.h>         // For exception class
 
 using namespace std;
 
+/*
 typedef struct PacketCnt_t{
 	struct pcap_pkthdr pcap_hdr;
 	u_char pcap_pkt[];
 }PacketCnt;
-
+*/
 /*
 * Message Type definition
 */
@@ -49,23 +49,23 @@ enum dMType
 * SoR data structure
 */
 struct SoRData{
-	int packetID;
-	char sourceIP[15];
+	int packet_id;
+	char src_ip[15];
 	short sourcePort;
+	int pkt_len;
 	int contentID;
 	int sor_flg;
 	dMType type;
 	double packetGenTime;
 	struct pcap_pkthdr pcap_hdr;
-	u_char pcap_pkt[];
-	///char msg[100];
+	u_char pcap_pkt[1500];
 };
 
-
 struct SoRSimHeader{
-	int packetID;
-	char sourceIP[15];
+	int packet_id;
+	char src_ip[15];
 	short sourcePort;
+	int pkt_len;
 	int contentID;
 	int sor_flg;
 	dMType type;
