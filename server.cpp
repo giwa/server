@@ -50,6 +50,7 @@ int main(int argc, char *argv[]) {
   try {
     UDPSocket sock(echoServPort);
 
+	size_t cnt = 0;
     int recvMsgSize;                  // Size of received message
     string sourceAddress;             // Address of datagram source
     unsigned short sourcePort;        // Port of datagram source
@@ -57,9 +58,18 @@ int main(int argc, char *argv[]) {
     for (;;) {  // Run forever
       // Block until receive message from a client
       recvMsgSize = sock.recvFrom(data, sizeof(SoRData), sourceAddress, sourcePort);
+	  cout << "src IP " << data->src_ip << endl;
+	  string server_ip = "192.168.1.2";
+	  memcpy(data->src_ip, server_ip.c_str() , server_ip.size());
+	  data->src_ip[server_ip.size()] = '\0';
+	  data->sor_flg = 1;
 
-	cout << "IP: " << sourceAddress << "	" << "Port: " << sourcePort << endl;
+
+
+		cout << "PacketID" << data->packet_id << endl;
+		cout << "IP: " << sourceAddress << "	" << "Port: " << sourcePort << endl;
       sock.sendTo(data, sizeof(SoRData), sourceAddress, sourcePort);
+	  cout << "send" << endl;
     }
   } catch (SocketException &e) {
     cerr << e.what() << endl;
